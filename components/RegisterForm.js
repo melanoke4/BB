@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -33,11 +32,6 @@ function RegisterForm({ user, updateUser }) {
   );
 }
 
-// RegisterForm.propTypes = {
-//   user: PropTypes.shape({
-//     uid: PropTypes.string.isRequired,
-//   }).isRequired,
-//   updateUser: PropTypes.func.isRequired,
-// };
+
 
 export default RegisterForm;
