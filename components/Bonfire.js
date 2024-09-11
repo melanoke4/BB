@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './Bonfire.module.css';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
+import Image from 'next/image';
 
 function Bonfire({ navigateTo }) {
   const [isResting, setIsResting] = useState(false);
@@ -26,7 +27,14 @@ function Bonfire({ navigateTo }) {
           onClick={() => setIsResting(true)}
           onMouseEnter={onMouseEnter}
         >
-          <img src="/images/bonfire-darksouls.gif" alt="Bonfire" className={styles.bonfireImage}/>
+          <Image
+            src="/images/bonfire-darksouls.gif"
+            width={200}
+            height={200}
+            alt="Picture of the bonfire"
+            className={styles.bonfireImage}
+          />
+          {/* <img src="/images/bonfire-darksouls.gif" alt="Bonfire" className={styles.bonfireImage}/> */}
           <span className={styles.hoverText}>Rest at Bonfire</span>
         </button>
       )}

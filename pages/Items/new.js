@@ -1,9 +1,9 @@
-import React from "react";
-import Items from "../../components/Items";
+import React from 'react';
+// import Items from '../../components/Items';
 
 export default function newItem() {
-    return (
-        //item form
+  return (
+        //item form 
         <a>Item Form</a>
     )
 }
