@@ -1,22 +1,52 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
+@font-face {
+  font-family: 'Optimus Princeps';
+  src: url('/fonts/OptimusPrinceps.ttf') format('truetype'),
+       url('/fonts/OptimusPrincepsSemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Optimus Princeps', sans-serif;
+  background-color: #181717; /* Dark Gray */
+  color: #B2B2B2; /* Ash Gray */
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
+  color: #4682B4; /* Steel Blue */
 }
 
-* {
+/* * {
   box-sizing: border-box;
+} */
+
+
+h1, h2, h3 {
+  color: #708090; /* Gold */
+  
 }
 
-body {
-  background-color: #88effd;
+
+
+#signout-nav {
+  background-color: #2d0707ca; /* Blood Red */
+  color: #ffffff99; /* White for text */
 }
+
+button {
+  background-color: #b2b2b28c;
+  color: #ffffff9d;
+}
+
+/* .bonfire-button {
+  background-color: orangered;
+  color: #FFD700; 
+} */
+

@@ -1,30 +1,36 @@
 // src/components/Bonfire.js
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from 'next/link';
+import styles from './Bonfire.module.css';
+import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 
-function Bonfire({ isResting, setIsResting }) {
+function Bonfire({ navigateTo }) {
+  const [isResting, setIsResting] = useState(false);
+    
+  const onMouseEnter = useCallback(() => console.warn('made it div'))
+
   return (
-    <div>
-      <h1>Welcome, Ashen One. </h1>
+    <Container className='mt-5'>
+      <h1>Welcome, Ashen One.</h1>
       <h2>Rest here, and let the fire guide your way.</h2>
       {isResting ? (
         <div>
-          <Link href="/Items">
-            <button>Inventory</button>
-          </Link>
-
-          <Link href="/profile">
-            <button>Profile</button>
-          </Link>
-          
-          <Link href="/add-item">
-            <button>Add Item</button>
-          </Link>
+          <button onClick={() => navigateTo('Items')}>Items</button>
+          <button onClick={() => navigateTo('profile')}>Profile</button>
+          <button onClick={() => navigateTo('Items/new')}>Add Item</button>
         </div>
       ) : (
-        <button onClick={() => setIsResting(true)}>Rest at Bonfire</button>
+        <button 
+          className={`mt-3 ${styles.bonfireButton}`} 
+          onClick={() => setIsResting(true)}
+          onMouseEnter={onMouseEnter}
+        >
+          <img src="/images/bonfire-darksouls.gif" alt="Bonfire" className={styles.bonfireImage}/>
+          <span className={styles.hoverText}>Rest at Bonfire</span>
+        </button>
       )}
-    </div>
+    </Container>
   );
 }
 

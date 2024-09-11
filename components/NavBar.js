@@ -35,7 +35,7 @@ export default function NavBar() {
               <Nav.Link>Inventory</Nav.Link>
             </Link>
 
-            <Button variant="danger" onClick={signOut}>
+            <Button id="signout-nav" variant="danger" onClick={signOut}>
               Sign Out
             </Button>
 
