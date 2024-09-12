@@ -1,9 +1,10 @@
 import React from 'react';
-// import Items from '../../components/Items';
+import ItemForm from '../../components/ItemForm';
+import { useAuth } from '../../utils/context/authContext';
 
 export default function newItem() {
+    const { user } = useAuth();
   return (
-        //item form 
-        <a>Item Form</a>
+    <ItemForm userId={user.id} />
     )
 }
