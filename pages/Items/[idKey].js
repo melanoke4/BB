@@ -1,5 +1,3 @@
-// pages/items/[id].js
-
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleItem } from '../../api/items';
