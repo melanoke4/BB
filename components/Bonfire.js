@@ -1,4 +1,4 @@
-// src/components/Bonfire.js
+
 import React, { useCallback } from 'react';
 import Link from 'next/link';
 import styles from './Bonfire.module.css';
