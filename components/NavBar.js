@@ -31,7 +31,7 @@ export default function NavBar() {
               <Nav.Link>Add Item</Nav.Link>
             </Link>
 
-            <Link passHref href="/Items">
+            <Link passHref href="/inventory">
               <Nav.Link>Inventory</Nav.Link>
             </Link>
 

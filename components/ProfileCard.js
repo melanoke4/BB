@@ -1,14 +1,14 @@
 // src/components/Profile.js
 import React from 'react';
 
-function Profile() {
+function ProfileCard() {
   // Fetch user data
   return (
     <div className="profile">
-      <h2>User Profile</h2>
+      <h2>User ProfileCard</h2>
       {/* Display user info */}
     </div>
   );
 }
 
-export default Profile;
+export default ProfileCard;

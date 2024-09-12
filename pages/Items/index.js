@@ -1,6 +1,6 @@
-import Items from '../../components/Items'
+import ItemCard from '../../components/ItemCard'
 import React from 'react';
 
 export default function ItemsPage() {
-  return <Items />;
+  return <ItemCard />;
 }
