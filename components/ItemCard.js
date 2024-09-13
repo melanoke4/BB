@@ -14,8 +14,9 @@ const ItemCard = ({ item }) => {
         <p className="card-text">Location: {item.location_name}</p>
         <p className="card-text">Status: {item.status_name}</p>
         <p className="card-text">Lore: {item?.lore?.content}</p>
-        <p className="card-text">Review: {item?.review}</p>
+        <p className="card-text">Review: {item?.review?.content}</p>
         <p className="card-text">Categories: {item.category_names?.join(', ')}</p>
+
 
 
         {/* <p className="card-text">Categories: {item.categories.map(cat => cat.name).join(', ')}</p>

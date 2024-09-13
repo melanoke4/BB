@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { useAuth } from '../utils/context/authContext';
+import { api } from '../utils/api';
 
 const ItemForm = ({ itemId, userId }) => {
   const router = useRouter();
@@ -14,8 +14,8 @@ const ItemForm = ({ itemId, userId }) => {
     status: '',
     image_url: '',
     categories: [],
-    lore: '',
-    review: '',
+    lore: { content:'' },
+    review: { content:'' },
     user_id: userId
   });
   const [imageFile, setImageFile] = useState(null);
@@ -23,14 +23,7 @@ const ItemForm = ({ itemId, userId }) => {
   const [statuses, setStatuses] = useState([]);
   const [categories, setCategories] = useState([]);
   const [imageUploadMethod, setImageUploadMethod] = useState('url');
-  const API_URL = process.env.NEXT_PUBLIC_DATABASE_URL || 'http://localhost:8000';
 
-  const api = axios.create({
-    baseURL: API_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,11 +69,16 @@ const ItemForm = ({ itemId, userId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if(name === "lore" || name === "review"){
+      value = { content:value }
+    }
     setFormData(prevState => ({
       ...prevState,
       [name]: value
     }));
   };
+
+
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -95,38 +93,18 @@ const ItemForm = ({ itemId, userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formDataToSend = new FormData();
-      for (const key in formData) {
-        if (key === 'categories') {
-          formData[key].forEach(categoryId => {
-            formDataToSend.append('categories', categoryId);
-          });
-        } else if (key !== 'image_url' || imageUploadMethod === 'url') {
-          formDataToSend.append(key, formData[key]);
-        }
-      }
-
-      // user_id 
-      formDataToSend.append('user_id', userId);
-
-      if (imageUploadMethod === 'file' && imageFile) {
-        formDataToSend.append('image', imageFile);
-      }
-
-      const config = {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      };
-
+      let response;
       if (itemId) {
-        await axios.put(`${API_URL}/items/${itemId}`, formDataToSend, config);
+        response = await api.put(`/items/${itemId}`, formData);
       } else {
-        await axios.post(`${API_URL}/items`, formDataToSend, config);
+        response = await api.post(`/items`, formData);
       }
       router.push('/inventory');
     } catch (error) {
       console.error('Error submitting form:', error.response ? error.response.data : error);
     }
   };
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -255,21 +233,22 @@ const ItemForm = ({ itemId, userId }) => {
       </div>
       <div>
         <label htmlFor="lore">Lore:</label>
-        <input
-          type="textarea"
+        <textarea
           id="lore"
           name="lore"
-          value={formData.lore}
-          onChange={handleChange} />
-      </div><div>
+          value={formData.lore.content}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
         <label htmlFor="review">Review:</label>
-        <input
-          type="textarea"
+        <textarea
           id="review"
           name="review"
-          value={formData.review}
-          onChange={handleChange} />
-
+          value={formData.review.content}
+          onChange={handleChange}
+        />
       </div>
 
 
