@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 function Bonfire({ navigateTo }) {
   const [isResting, setIsResting] = useState(false);
-    
+
   const onMouseEnter = useCallback(() => console.warn('made it div'))
 
   return (
@@ -17,13 +17,15 @@ function Bonfire({ navigateTo }) {
       <h2>Rest here, and let the fire guide your way.</h2>
       {isResting ? (
         <div>
-          <button onClick={() => navigateTo('Items')}>Items</button>
+          <button onClick={() => navigateTo('inventory')}>Inventory</button>
           <button onClick={() => navigateTo('profile')}>Profile</button>
-          <button onClick={() => navigateTo('Items/new')}>Add Item</button>
+          <button onClick={() => navigateTo('items/new')}>Add Item</button>
+          <button onClick={() => setIsResting(false)}>Return to Bonfire</button>
+
         </div>
       ) : (
-        <button 
-          className={`mt-3 ${styles.bonfireButton}`} 
+        <button
+          className={`mt-3 ${styles.bonfireButton}`}
           onClick={() => setIsResting(true)}
           onMouseEnter={onMouseEnter}
         >

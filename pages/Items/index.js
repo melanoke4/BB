@@ -1,6 +1,6 @@
 import ItemCard from '../../components/ItemCard'
 import React from 'react';
 
-export default function ItemsPage() {
-  return <ItemCard />;
+export default function ItemsPage({ navigateTo }) {
+  return <h1>hey</h1>;
 }

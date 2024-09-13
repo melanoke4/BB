@@ -4,10 +4,14 @@ import ItemCard from '../components/ItemCard';
 import axios from 'axios';
 import Link from 'next/link';
 
-const Inventory = () => {
+const Inventory = ({ navigateTo}) => {
   const { user } = useAuth();
   const [items, setItems] = useState([]);
   const API_URL = process.env.NEXT_PUBLIC_DATABASE_URL || 'http://localhost:8000';
+
+  const returnToBonfire = () => {
+    navigateTo('/')
+  }
 
 const api = axios.create({
   baseURL: API_URL,
@@ -37,7 +41,7 @@ const api = axios.create({
       <div className="row">
         {items.map((item) => (
           <div key={item.id} className="col-md-4 mb-4">
-            <ItemCard item={item} />
+            <ItemCard item={item} navigateTo={navigateTo}/>
           </div>
         ))}
       </div>

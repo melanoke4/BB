@@ -10,6 +10,7 @@ import {
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
+  
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -27,7 +28,7 @@ export default function NavBar() {
               <Nav.Link>Profile</Nav.Link>
             </Link>
 
-            <Link passHref href="/Items/new">
+            <Link passHref href="/items/new">
               <Nav.Link>Add Item</Nav.Link>
             </Link>
 

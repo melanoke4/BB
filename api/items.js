@@ -48,12 +48,14 @@ export const deleteItem = async (itemId) => {
   }
 };
 
-export const getSingleItem = async (itemId) => {
-  try {
-    const response = await api.get(`/items/${itemId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching single item:', error);
-    throw error;
-  }
-};
+
+export const getSingleItem = async (itemId, userId) => {
+    try {
+      console.log('getting single item', itemId);
+      const response = await api.get(`/items/${itemId}?user_id=${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching single item:', error);
+      throw error;
+    }
+  };

@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useAuth } from '../utils/context/authContext';
 
 const ItemForm = ({ itemId, userId }) => {
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-      name: '',
-      cost: '',
-      purchase_date: '',
-      location: '',
-      status: '',
-      image_url: '',
-      categories: [],
-      lore: '',
-      review: '',
-      user_id: userId
-    });
-    const [imageFile, setImageFile] = useState(null);
-    const [locations, setLocations] = useState([]);
-    const [statuses, setStatuses] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [imageUploadMethod, setImageUploadMethod] = useState('url');
-    const API_URL = process.env.NEXT_PUBLIC_DATABASE_URL || 'http://localhost:8000';
-  
-    const api = axios.create({
-      baseURL: API_URL,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  const router = useRouter();
+  const user = useAuth()
+  const [formData, setFormData] = useState({
+    name: '',
+    cost: '',
+    purchase_date: '',
+    location: '',
+    status: '',
+    image_url: '',
+    categories: [],
+    lore: '',
+    review: '',
+    user_id: userId
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [locations, setLocations] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [imageUploadMethod, setImageUploadMethod] = useState('url');
+  const API_URL = process.env.NEXT_PUBLIC_DATABASE_URL || 'http://localhost:8000';
+
+  const api = axios.create({
+    baseURL: API_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +41,7 @@ const ItemForm = ({ itemId, userId }) => {
           api.get('/categories')
         ]);
         console.log('Locations:', locationsRes.data);
-      console.log('Statuses:', statusesRes.data);
+        console.log('Statuses:', statusesRes.data);
         setLocations(locationsRes.data);
         setStatuses(statusesRes.data);
         setCategories(categoriesRes.data);
@@ -62,7 +64,7 @@ const ItemForm = ({ itemId, userId }) => {
     if (itemId) {
       const fetchItem = async () => {
         try {
-          const response = await api.get(`/items/${itemId}`);
+          const response = await api.get(`/items/${itemId}?user_id=${user.id}`);
           setFormData(response.data);
         } catch (error) {
           console.error('Error fetching item:', error);
@@ -137,17 +139,17 @@ const ItemForm = ({ itemId, userId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-          <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required />
-          </div>
-          <div>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required />
+      </div>
+      <div>
         <label>Image Upload Method:</label>
         <select
           value={imageUploadMethod}
@@ -183,35 +185,35 @@ const ItemForm = ({ itemId, userId }) => {
           />
         </div>
       )}
-          <div>
-              <label htmlFor="cost">Cost:</label>
-              <input
-                  type="number"
-                  id="cost"
-                  name="cost"
-                  value={formData.cost}
-                  onChange={handleChange}
-                  step="0.01"
-                  required />
-          </div>
-          <div>
-              <label htmlFor="purchase_date">Purchase Date:</label>
-              <input
-                  type="date"
-                  id="purchase_date"
-                  name="purchase_date"
-                  value={formData.purchase_date}
-                  onChange={handleChange}
-                  required />
-          </div>
-          <div>
+      <div>
+        <label htmlFor="cost">Cost:</label>
+        <input
+          type="number"
+          id="cost"
+          name="cost"
+          value={formData.cost}
+          onChange={handleChange}
+          step="0.01"
+          required />
+      </div>
+      <div>
+        <label htmlFor="purchase_date">Purchase Date:</label>
+        <input
+          type="date"
+          id="purchase_date"
+          name="purchase_date"
+          value={formData.purchase_date}
+          onChange={handleChange}
+          required />
+      </div>
+      <div>
         <label htmlFor="location">Location:</label>
         <select
           id="location"
           name="location"
           value={formData.location}
           onChange={handleChange}
-        //   required
+          required
         >
           <option value="">Select a location</option>
           {locations.map(location => (
@@ -226,7 +228,7 @@ const ItemForm = ({ itemId, userId }) => {
           name="status"
           value={formData.status}
           onChange={handleChange}
-        //   required
+          required
         >
           <option value="">Select a status</option>
           {statuses.map(status => (
@@ -236,36 +238,42 @@ const ItemForm = ({ itemId, userId }) => {
       </div>
 
 
-          <div>
-              <label>Categories:</label>
-              {categories.map(category => (
-                  <div key={category.id}>
-                      <input
-                          type="checkbox"
-                          id={`category-${category.id}`}
-                          name="categories"
-                          value={category.id}
-                          checked={formData.categories.includes(category.id)}
-                          onChange={handleCategoryChange} />
-                      <label htmlFor={`category-${category.id}`}>{category.name}</label>
-                  </div>
-              ))}
+      <div>
+        <label>Categories:</label>
+        {categories.map(category => (
+          <div key={category.id}>
+            <input
+              type="checkbox"
+              id={`category-${category.id}`}
+              name="categories"
+              value={category.id}
+              checked={formData.categories.includes(category.id)}
+              onChange={handleCategoryChange} />
+            <label htmlFor={`category-${category.id}`}>{category.name}</label>
           </div>
-          <div>
-          <label htmlFor="lore">Lore:</label>
-          <textarea
-              id="lore"
-              name="lore"
-              value={formData.lore}
-              onChange={handleChange} />
+        ))}
+      </div>
+      <div>
+        <label htmlFor="lore">Lore:</label>
+        <input
+          type="textarea"
+          id="lore"
+          name="lore"
+          value={formData.lore}
+          onChange={handleChange} />
       </div><div>
-              <label htmlFor="review">Review:</label>
-              <textarea
-                  id="review"
-                  name="review"
-                  value={formData.review}
-                  onChange={handleChange} />
-          </div><button type="submit">Submit</button>
+        <label htmlFor="review">Review:</label>
+        <input
+          type="textarea"
+          id="review"
+          name="review"
+          value={formData.review}
+          onChange={handleChange} />
+
+      </div>
+
+
+      <button type="submit">Submit</button>
     </form>
   );
 };
