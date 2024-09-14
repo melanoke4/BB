@@ -21,10 +21,10 @@ const Instructions = ({ onClose }) => {
             <strong>View Inventory:</strong> Once rested, you can browse through all the items in your Bottomless Box.
           </li>
           <li>
-            <strong>Add New Item:</strong> To add a new item to your Bottomless Box, click the "Add Item" button. Fill out the required fields.
+            <strong>Add New Item:</strong> To add a new item to your Bottomless Box, click the {`"Add Item"`} button. Fill out the required fields.
           </li>
           <li>
-            <strong>Edit Items:</strong> To modify an existing item, click on the item and then select the "Edit" option. You can update any of the item's details.
+            <strong>Edit Items:</strong> To modify an existing item, click on the item and then select the {`"Edit"`} option. You can update any of the item{`'`}s details.
           </li>
           <li>
             <strong>Assign Categories:</strong> When adding or editing an item, you can assign it to one or more categories. This helps organize your inventory.
@@ -33,7 +33,7 @@ const Instructions = ({ onClose }) => {
             <strong>Set Status and Location:</strong> For each item, you can set its current status (e.g., New, Used, Broken) and location (e.g., Firelink Shrine, Undead Burg).
           </li>
           <li>
-            <strong>Add Lore:</strong> Enhance your items by adding lore. This can include the item's history, significance, or any interesting facts.
+            <strong>Add Lore:</strong> Enhance your items by adding lore. This can include the item{`'`}s history, significance, or any interesting facts!
           </li>
           <li>
             <strong>Write a Review:</strong> After using an item, you can add a personal review. Share your thoughts on its effectiveness or any memorable experiences.
