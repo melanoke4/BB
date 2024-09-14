@@ -1,9 +1,22 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { deleteItem } from '../api/items';
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, onEdit, onUpdate }) => {
   const router = useRouter();
+
+  const deleteThisItem = () => {
+    if (window.confirm(`Delete ${item.name}?`)) {
+      deleteItem(item.id).then(() => {
+        if (onDelete) onDelete(item.id);
+        if (onUpdate) onUpdate();
+      });
+    }
+  };
+
+
 
   return (
     <div className="card">
@@ -17,22 +30,13 @@ const ItemCard = ({ item }) => {
         <p className="card-text">Review: {item?.review?.content}</p>
         <p className="card-text">Categories: {item.category_names?.join(', ')}</p>
 
-
-
-        {/* <p className="card-text">Categories: {item.categories.map(cat => cat.name).join(', ')}</p>
-        {item.lore && item.lore.content && (
-  <div className="card-text">
-    <h6>Lore:</h6>
-    <p>{item.lore.content}</p>
-  </div>
-)}
-{item.review && (
-  <div className="card-text">
-    <h6>Review:</h6>
-    <p>{typeof item.review === 'object' ? item.review.content : item.review}</p>
-  </div>
-)} */}
           <button onClick={() => { router.push(`/items/${item.id}`) }}>View Details</button>
+          <Link href={`/items/edit/${item.id}`} passHref>
+  <Button variant="primary">Edit</Button>
+</Link>
+      <Button variant="danger" onClick={deleteThisItem} className="m-2">
+        DELETE
+      </Button>
 
         
       </div>

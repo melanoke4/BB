@@ -40,7 +40,7 @@ export const deleteItem = async (itemId) => {
 };
 
 
-export const getSingleItem = async (itemId, userId) => {
+  export const getSingleItem = async (itemId, userId) => {
     try {
       console.log('getting single item', itemId);
       const response = await api.get(`/items/${itemId}?user_id=${userId}`);
