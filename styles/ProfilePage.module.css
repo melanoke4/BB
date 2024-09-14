@@ -1,0 +1,18 @@
+.profilePageContainer {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    min-height: 100vh;
+    background-color: #000000;
+    padding: 10px;
+  }
+  
+  .profileTitle {
+    color: #c0a062;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }

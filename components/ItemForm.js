@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
 import { api } from '../utils/api';
+import styles from '../styles/ItemForm.module.css';
 
 const ItemForm = ({ itemId, userId }) => {
   const router = useRouter();
@@ -112,146 +113,168 @@ const ItemForm = ({ itemId, userId }) => {
   };
 
   return (
+    <div className={styles.formContainer}>
+    <h2 className={styles.formTitle}>Add A New Item</h2>
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Image Upload Method:</label>
-        <select
-          value={imageUploadMethod}
-          onChange={(e) => setImageUploadMethod(e.target.value)}
-        >
-          <option value="url">URL</option>
-          <option value="file">File Upload</option>
-        </select>
-      </div>
-
-      {imageUploadMethod === 'url' ? (
-        <div>
-          <label htmlFor="image_url">Image URL:</label>
+      <div className={styles.formGroup}>
+      <label className={styles.label} htmlFor="name">Name:</label>
           <input
-            type="url"
-            id="image_url"
-            name="image_url"
-            value={formData.image_url}
+            className={styles.input}
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
         </div>
-      ) : (
-        <div>
-          <label htmlFor="image">Upload Image:</label>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Image Upload Method:</label>
+          <select
+            className={styles.select}
+            value={imageUploadMethod}
+            onChange={(e) => setImageUploadMethod(e.target.value)}
+          >
+            <option value="url">URL</option>
+            <option value="file">File Upload</option>
+          </select>
+        </div>
+
+        {imageUploadMethod === 'url' ? (
+          <div className={styles.formGroup}>
+            <label className={styles.label} htmlFor="image_url">Image URL:</label>
+            <input
+              className={styles.input}
+              type="url"
+              id="image_url"
+              name="image_url"
+              value={formData.image_url}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        ) : (
+          <div className={styles.formGroup}>
+            <label className={styles.label} htmlFor="image">Upload Image:</label>
+            <input
+              className={styles.input}
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleImageUpload}
+              accept="image/*"
+              required
+            />
+          </div>
+        )}
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="cost">Cost:</label>
           <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleImageUpload}
-            accept="image/*"
+            className={styles.input}
+            type="number"
+            id="cost"
+            name="cost"
+            value={formData.cost}
+            onChange={handleChange}
+            step="0.01"
             required
           />
         </div>
-      )}
-      <div>
-        <label htmlFor="cost">Cost:</label>
-        <input
-          type="number"
-          id="cost"
-          name="cost"
-          value={formData.cost}
-          onChange={handleChange}
-          step="0.01"
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="purchase_date">Purchase Date:</label>
-        <input
-          type="date"
-          id="purchase_date"
-          name="purchase_date"
-          value={formData.purchase_date}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="location">Location:</label>
-        <select
-          id="location"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a location</option>
-          {locations.map((location) => (
-            <option key={location.id} value={location.id.toString()}>{location.name}</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="status">Status:</label>
-        <select
-          id="status"
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a status</option>
-          {statuses.map((status) => (
-            <option key={status.id} value={status.id.toString()}>{status.name}</option>
-          ))}
-        </select>
-      </div>
 
-      <div>
-        <label>Categories:</label>
-        {categories.map((category) => (
-          <div key={category.id}>
-            <input
-              type="checkbox"
-              id={`category-${category.id}`}
-              name="categories"
-              value={category.id}
-              checked={formData.categories.includes(category.id)}
-              onChange={handleCategoryChange}
-            />
-            <label htmlFor={`category-${category.id}`}>{category.name}</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="purchase_date">Purchase Date:</label>
+          <input
+            className={styles.input}
+            type="date"
+            id="purchase_date"
+            name="purchase_date"
+            value={formData.purchase_date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="location">Location:</label>
+          <select
+            className={styles.select}
+            id="location"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select a location</option>
+            {locations.map((location) => (
+              <option key={location.id} value={location.id.toString()}>{location.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="status">Status:</label>
+          <select
+            className={styles.select}
+            id="status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select a status</option>
+            {statuses.map((status) => (
+              <option key={status.id} value={status.id.toString()}>{status.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Categories:</label>
+          <div className={styles.categoriesContainer}>
+            {categories.map((category) => (
+              <div key={category.id}>
+                <input
+                  className={styles.checkbox}
+                  type="checkbox"
+                  id={`category-${category.id}`}
+                  name="categories"
+                  value={category.id}
+                  checked={formData.categories.includes(category.id)}
+                  onChange={handleCategoryChange}
+                />
+                <label htmlFor={`category-${category.id}`}>{category.name}</label>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="lore">Lore:</label>
-        <textarea
-          id="lore"
-          name="lore"
-          value={formData.lore.content}
-          onChange={handleChange}
-        />
-      </div>
+        </div>
 
-      <div>
-        <label htmlFor="review">Review:</label>
-        <textarea
-          id="review"
-          name="review"
-          value={formData.review.content}
-          onChange={handleChange}
-        />
-      </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="lore">Lore:</label>
+          <textarea
+            className={styles.textarea}
+            id="lore"
+            name="lore"
+            value={formData.lore.content}
+            onChange={handleChange}
+          />
+        </div>
 
-      <button type="submit">Submit</button>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="review">Review:</label>
+          <textarea
+            className={styles.textarea}
+            id="review"
+            name="review"
+            value={formData.review.content}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button className={styles.button} type="submit">Submit</button>
     </form>
+    </div>
   );
 };
 

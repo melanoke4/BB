@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getSingleItem } from '../../api/items';
+import { getSingleItem, deleteItem } from '../../api/items';
 import { useAuth } from '../../utils/context/authContext';
-import ItemCard from '../../components/ItemCard'; // Import ItemCard
+import ItemCard from '../../components/ItemCard';
+import styles from '../../styles/ViewItem.module.css';
 
 export default function ViewItem() {
   const [itemDetails, setItemDetails] = useState(null);
@@ -34,52 +35,28 @@ export default function ViewItem() {
   }, [id, user.id]);
 
   const handleEdit = (itemId) => {
-    router.push(`/edit/${itemId}`);
+    router.push(`/items/edit/${itemId}`);
   };
 
   const handleDelete = (itemId) => {
-    deleteItem(itemId).then(() => {
+    deleteItem(itemId, user.id).then(() => {
       router.push('/inventory');
     });
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!itemDetails) return <div>No item found</div>;
-
-  // useEffect(() => {
-  //   if (id) {
-  //     setLoading(true);
-  //     getSingleItem(id, user.id)
-  //       .then(data => {
-  //         console.log('Item data:', data);
-  //         setItemDetails(data);
-  //         setLoading(false);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error fetching item:', error);
-  //         setError('Failed to load item details');
-  //         setLoading(false);
-  //       });
-  //   }
-  // }, [id, user.id]);
-
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
-  // if (!itemDetails) return <div>No item found</div>;
+  if (loading) return <div className={styles.loading}>Loading...</div>;
+  if (error) return <div className={styles.error}>Error: {error}</div>;
+  if (!itemDetails) return <div className={styles.noItem}>No item found</div>;
 
   return (
-    <div className="mt-5 d-flex flex-wrap justify-content-center">
-      <div className="text-white ms-5 details">
-        <h5>{itemDetails.name} - Details</h5>
-        <hr />
-        <ItemCard
-          item={itemDetails}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onUpdate={fetchItem}
-        />
-      </div>
+    <div className={styles.viewItemContainer}>
+      <h1 className={styles.pageTitle}>Item Details</h1>
+      <ItemCard
+        item={itemDetails}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onUpdate={fetchItem}
+      />
     </div>
   );
 }

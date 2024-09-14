@@ -29,8 +29,8 @@ const Inventory = ({ navigateTo }) => {
       )}
     </div>
     
-      <h1>My Inventory</h1>
-      <ItemList items={itemList} setItems={setItemList} navigateTo={navigateTo} />
+      {/* <h1>My Inventory</h1>
+      <ItemList items={itemList} setItems={setItemList} navigateTo={navigateTo} /> */}
     </div>
   );
 };

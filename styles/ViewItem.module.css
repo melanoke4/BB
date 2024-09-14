@@ -1,0 +1,20 @@
+.viewItemContainer {
+    background-color: #000;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .pageTitle {
+    color: #c0a062;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .loading, .error, .noItem {
+    color: #d3c7a2;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+  }

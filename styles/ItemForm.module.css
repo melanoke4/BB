@@ -1,0 +1,59 @@
+.formContainer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #d3c7a2;
+    padding: 20px;
+    border: 2px solid #8b7d6b;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .formTitle {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #c0a062;
+    text-transform: uppercase;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    color: #c0a062;
+  }
+  
+  .input, .select, .textarea {
+    width: 100%;
+    padding: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #8b7d6b;
+    color: #d3c7a2;
+  }
+  
+  .checkbox {
+    margin-right: 5px;
+  }
+  
+  .button {
+    background-color: #c0a062;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #d3c7a2;
+  }
+  
+  .categoriesContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }

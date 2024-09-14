@@ -1,0 +1,57 @@
+.itemCard {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #8b7d6b;
+    color: #d3c7a2;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .itemImage {
+    flex: 0 0 200px;
+    padding: 10px;
+  }
+  
+  .itemImage img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .itemDetails {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .itemName {
+    color: #c0a062;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .itemInfo p {
+    margin: 5px 0;
+  }
+  
+  .itemInfo span {
+    color: #c0a062;
+    font-weight: bold;
+  }
+  
+  .itemActions {
+    margin-top: 20px;
+  }
+  
+  .itemActions button {
+    background-color: #c0a062;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+  }
+  
+  .itemActions button:hover {
+    background-color: #d3c7a2;
+  }
