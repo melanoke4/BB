@@ -15,7 +15,6 @@ const ItemList = ({ items, setItems }) => {
         <div key={item.id} className="col-md-4 mb-4">
           <ItemCard item={item} items={items} setItems={setItems} onEdit={handleEdit} />
 
-
         </div>
       ))}
     </div>

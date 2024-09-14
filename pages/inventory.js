@@ -9,13 +9,11 @@ const Inventory = ({ navigateTo }) => {
   const { items, isLoading, error } = useItems(user?.id);
 
   useEffect(() => {
-    setItemList(items)
-  }, [items])
+    setItemList(items);
+  }, [items]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
-  
 
   return (
     <div className="container">

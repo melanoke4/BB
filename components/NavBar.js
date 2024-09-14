@@ -10,7 +10,6 @@ import {
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
-  
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -40,7 +39,6 @@ export default function NavBar() {
               Sign Out
             </Button>
 
-            
           </Nav>
         </Navbar.Collapse>
       </Container>

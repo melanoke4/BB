@@ -1,18 +1,16 @@
-
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
-import styles from './Bonfire.module.css';
-import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Image from 'next/image';
+import styles from './Bonfire.module.css';
 
 function Bonfire({ navigateTo }) {
   const [isResting, setIsResting] = useState(false);
 
-  const onMouseEnter = useCallback(() => console.warn('made it div'))
+  const onMouseEnter = useCallback(() => console.warn('made it div'));
 
   return (
-    <Container className='mt-5'>
+    <Container className="mt-5">
       <h1>Welcome, Ashen One.</h1>
       <h2>Rest here, and let the fire guide your way.</h2>
       {isResting ? (

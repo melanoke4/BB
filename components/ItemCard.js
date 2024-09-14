@@ -13,16 +13,16 @@ const ItemCard = ({ item, items, setItems }) => {
     if (window.confirm(`Delete ${item.name}?`)) {
       try {
         await deleteItem(item.id, user.id);
-        
-        setItems([...items.filter(i => {
-          console.log('item.id', item.id, i.id)
-          return item.id != i.id})])
+
+        setItems([...items.filter((i) => {
+          console.log('item.id', item.id, i.id);
+          return item.id != i.id;
+        })]);
       } catch (error) {
         console.error('Error deleting item:', error);
       }
     }
   };
-
 
   return (
     <div className="card">
@@ -34,16 +34,18 @@ const ItemCard = ({ item, items, setItems }) => {
         <p className="card-text">Status: {item.status_name}</p>
         <p className="card-text">Lore: {item?.lore?.content}</p>
         <p className="card-text">Review: {item?.review?.content}</p>
-        <p className="card-text">Categories: {item.category_names?.join(', ')}</p>
-
-        <button onClick={() => { router.push(`/items/${item.id}`) }}>View Details</button>
-        <Link href={`/items/edit/${item.id}`} passHref>
-          <Button variant="primary">Edit</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisItem} className="m-2">
-          DELETE
-        </Button>
-
+        {/* <p className="card-text">Categories: {item.category_names?.join(', ')}</p> */}
+        <p className="card-text">
+          {item.category_names && item.category_names.length > 0 ? (
+            <>
+              {item.category_names.length === 1 ? 'Category: ' : 'Categories: '}
+              {item.category_names.join(', ')}
+            </>
+          ) : 'No categories'}
+        </p>
+        <button onClick={() => { router.push(`/items/${item.id}`); }} className="m-1">View Details</button>
+        <button onClick={() => { router.push(`/items/edit/${item.id}`); }} className="m-1">Edit</button>
+        <button onClick={deleteThisItem} className="m-1">DELETE</button>
 
       </div>
     </div>
