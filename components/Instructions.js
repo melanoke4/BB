@@ -33,7 +33,7 @@ const Instructions = ({ onClose }) => {
             <strong>Set Status and Location:</strong> For each item, you can set its current status (e.g., New, Used, Broken) and location (e.g., Firelink Shrine, Undead Burg).
           </li>
           <li>
-            <strong>Add Lore:</strong> Enhance your items by adding lore. This can include the item{`'`}s history, significance, or any interesting facts.
+            <strong>Add Lore:</strong> Enhance your items by adding lore. This can include the item{`'`}s history, significance, or any interesting facts!
           </li>
           <li>
             <strong>Write a Review:</strong> After using an item, you can add a personal review. Share your thoughts on its effectiveness or any memorable experiences.
