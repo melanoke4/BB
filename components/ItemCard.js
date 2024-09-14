@@ -1,9 +1,28 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { deleteItem } from '../api/items';
+import { useAuth } from '../utils/context/authContext';
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, items, setItems }) => {
   const router = useRouter();
+  const { user } = useAuth();
+
+  const deleteThisItem = async () => {
+    if (window.confirm(`Delete ${item.name}?`)) {
+      try {
+        await deleteItem(item.id, user.id);
+
+        setItems([...items.filter((i) => {
+          console.log('item.id', item.id, i.id);
+          return item.id != i.id;
+        })]);
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      }
+    }
+  };
 
   return (
     <div className="card">
@@ -15,26 +34,19 @@ const ItemCard = ({ item }) => {
         <p className="card-text">Status: {item.status_name}</p>
         <p className="card-text">Lore: {item?.lore?.content}</p>
         <p className="card-text">Review: {item?.review?.content}</p>
-        <p className="card-text">Categories: {item.category_names?.join(', ')}</p>
+        {/* <p className="card-text">Categories: {item.category_names?.join(', ')}</p> */}
+        <p className="card-text">
+          {item.category_names && item.category_names.length > 0 ? (
+            <>
+              {item.category_names.length === 1 ? 'Category: ' : 'Categories: '}
+              {item.category_names.join(', ')}
+            </>
+          ) : 'No categories'}
+        </p>
+        <button onClick={() => { router.push(`/items/${item.id}`); }} className="m-1">View Details</button>
+        <button onClick={() => { router.push(`/items/edit/${item.id}`); }} className="m-1">Edit</button>
+        <button onClick={deleteThisItem} className="m-1">DELETE</button>
 
-
-
-        {/* <p className="card-text">Categories: {item.categories.map(cat => cat.name).join(', ')}</p>
-        {item.lore && item.lore.content && (
-  <div className="card-text">
-    <h6>Lore:</h6>
-    <p>{item.lore.content}</p>
-  </div>
-)}
-{item.review && (
-  <div className="card-text">
-    <h6>Review:</h6>
-    <p>{typeof item.review === 'object' ? item.review.content : item.review}</p>
-  </div>
-)} */}
-          <button onClick={() => { router.push(`/items/${item.id}`) }}>View Details</button>
-
-        
       </div>
     </div>
   );

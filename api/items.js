@@ -30,9 +30,10 @@ export const updateItem = async (itemId, itemData) => {
   }
 };
 
-export const deleteItem = async (itemId) => {
+
+export const deleteItem = async (itemId, userId) => {
   try {
-    await api.delete(`/items/${itemId}`);
+    await api.delete(`/items/${itemId}?user_id=${userId}`);
   } catch (error) {
     console.error('Error deleting item:', error);
     throw error;
@@ -40,9 +41,9 @@ export const deleteItem = async (itemId) => {
 };
 
 
-export const getSingleItem = async (itemId, userId) => {
+  export const getSingleItem = async (itemId, userId) => {
     try {
-      console.log('getting single item', itemId);
+      console.log('getting single item', itemId, userId);
       const response = await api.get(`/items/${itemId}?user_id=${userId}`);
       return response.data;
     } catch (error) {

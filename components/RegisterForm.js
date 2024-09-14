@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { registerUser } from '../utils/auth'; 
+import { registerUser } from '../utils/auth';
 
 function RegisterForm({ user, updateUser }) {
   const [formData, setFormData] = useState({
@@ -31,7 +31,5 @@ function RegisterForm({ user, updateUser }) {
     </Form>
   );
 }
-
-
 
 export default RegisterForm;

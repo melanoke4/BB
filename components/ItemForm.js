@@ -5,7 +5,7 @@ import { api } from '../utils/api';
 
 const ItemForm = ({ itemId, userId }) => {
   const router = useRouter();
-  const user = useAuth()
+  const user = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     cost: '',
@@ -14,9 +14,9 @@ const ItemForm = ({ itemId, userId }) => {
     status: '',
     image_url: '',
     categories: [],
-    lore: { content:'' },
-    review: { content:'' },
-    user_id: userId
+    lore: { content: '' },
+    review: { content: '' },
+    user_id: userId,
   });
   const [imageFile, setImageFile] = useState(null);
   const [locations, setLocations] = useState([]);
@@ -24,14 +24,13 @@ const ItemForm = ({ itemId, userId }) => {
   const [categories, setCategories] = useState([]);
   const [imageUploadMethod, setImageUploadMethod] = useState('url');
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [locationsRes, statusesRes, categoriesRes] = await Promise.all([
           api.get('/locations'),
           api.get('/statuses'),
-          api.get('/categories')
+          api.get('/categories'),
         ]);
         console.log('Locations:', locationsRes.data);
         console.log('Statuses:', statusesRes.data);
@@ -41,10 +40,10 @@ const ItemForm = ({ itemId, userId }) => {
 
         // Set initial values for location and status if available
         if (locationsRes.data.length > 0) {
-          setFormData(prev => ({ ...prev, location: locationsRes.data[0].id.toString() }));
+          setFormData((prev) => ({ ...prev, location: locationsRes.data[0].id.toString() }));
         }
         if (statusesRes.data.length > 0) {
-          setFormData(prev => ({ ...prev, status: statusesRes.data[0].id.toString() }));
+          setFormData((prev) => ({ ...prev, status: statusesRes.data[0].id.toString() }));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -57,7 +56,7 @@ const ItemForm = ({ itemId, userId }) => {
     if (itemId) {
       const fetchItem = async () => {
         try {
-          const response = await api.get(`/items/${itemId}?user_id=${user.id}`);
+          const response = await api.get(`/items/${itemId}?user_id=${userId}`);
           setFormData(response.data);
         } catch (error) {
           console.error('Error fetching item:', error);
@@ -69,24 +68,22 @@ const ItemForm = ({ itemId, userId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(name === "lore" || name === "review"){
-      value = { content:value }
+    if (name === 'lore' || name === 'review') {
+      value = { content: value };
     }
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
-
-
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       categories: checked
         ? [...prevState.categories, parseInt(value)]
-        : prevState.categories.filter(id => id !== parseInt(value))
+        : prevState.categories.filter((id) => id !== parseInt(value)),
     }));
   };
 
@@ -97,7 +94,7 @@ const ItemForm = ({ itemId, userId }) => {
       if (itemId) {
         response = await api.put(`/items/${itemId}`, formData);
       } else {
-        response = await api.post(`/items`, formData);
+        response = await api.post('/items', formData);
       }
       router.push('/inventory');
     } catch (error) {
@@ -105,13 +102,12 @@ const ItemForm = ({ itemId, userId }) => {
     }
   };
 
-
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      image_url: '' // Clear the URL when a file is uploaded
+      image_url: '', // Clear the URL when a file is uploaded
     }));
   };
 
@@ -125,7 +121,8 @@ const ItemForm = ({ itemId, userId }) => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          required />
+          required
+        />
       </div>
       <div>
         <label>Image Upload Method:</label>
@@ -172,7 +169,8 @@ const ItemForm = ({ itemId, userId }) => {
           value={formData.cost}
           onChange={handleChange}
           step="0.01"
-          required />
+          required
+        />
       </div>
       <div>
         <label htmlFor="purchase_date">Purchase Date:</label>
@@ -182,7 +180,8 @@ const ItemForm = ({ itemId, userId }) => {
           name="purchase_date"
           value={formData.purchase_date}
           onChange={handleChange}
-          required />
+          required
+        />
       </div>
       <div>
         <label htmlFor="location">Location:</label>
@@ -194,7 +193,7 @@ const ItemForm = ({ itemId, userId }) => {
           required
         >
           <option value="">Select a location</option>
-          {locations.map(location => (
+          {locations.map((location) => (
             <option key={location.id} value={location.id.toString()}>{location.name}</option>
           ))}
         </select>
@@ -209,16 +208,15 @@ const ItemForm = ({ itemId, userId }) => {
           required
         >
           <option value="">Select a status</option>
-          {statuses.map(status => (
+          {statuses.map((status) => (
             <option key={status.id} value={status.id.toString()}>{status.name}</option>
           ))}
         </select>
       </div>
 
-
       <div>
         <label>Categories:</label>
-        {categories.map(category => (
+        {categories.map((category) => (
           <div key={category.id}>
             <input
               type="checkbox"
@@ -226,7 +224,8 @@ const ItemForm = ({ itemId, userId }) => {
               name="categories"
               value={category.id}
               checked={formData.categories.includes(category.id)}
-              onChange={handleCategoryChange} />
+              onChange={handleCategoryChange}
+            />
             <label htmlFor={`category-${category.id}`}>{category.name}</label>
           </div>
         ))}
@@ -250,7 +249,6 @@ const ItemForm = ({ itemId, userId }) => {
           onChange={handleChange}
         />
       </div>
-
 
       <button type="submit">Submit</button>
     </form>
