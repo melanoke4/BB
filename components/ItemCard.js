@@ -3,19 +3,25 @@ import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { deleteItem } from '../api/items';
+import { useAuth } from '../utils/context/authContext';
 
-const ItemCard = ({ item, onEdit, onUpdate }) => {
+const ItemCard = ({ item, items, setItems }) => {
   const router = useRouter();
+  const { user } = useAuth();
 
-  const deleteThisItem = () => {
+  const deleteThisItem = async () => {
     if (window.confirm(`Delete ${item.name}?`)) {
-      deleteItem(item.id).then(() => {
-        if (onDelete) onDelete(item.id);
-        if (onUpdate) onUpdate();
-      });
+      try {
+        await deleteItem(item.id, user.id);
+        
+        setItems([...items.filter(i => {
+          console.log('item.id', item.id, i.id)
+          return item.id != i.id})])
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      }
     }
   };
-
 
 
   return (
@@ -30,15 +36,15 @@ const ItemCard = ({ item, onEdit, onUpdate }) => {
         <p className="card-text">Review: {item?.review?.content}</p>
         <p className="card-text">Categories: {item.category_names?.join(', ')}</p>
 
-          <button onClick={() => { router.push(`/items/${item.id}`) }}>View Details</button>
-          <Link href={`/items/edit/${item.id}`} passHref>
-  <Button variant="primary">Edit</Button>
-</Link>
-      <Button variant="danger" onClick={deleteThisItem} className="m-2">
-        DELETE
-      </Button>
+        <button onClick={() => { router.push(`/items/${item.id}`) }}>View Details</button>
+        <Link href={`/items/edit/${item.id}`} passHref>
+          <Button variant="primary">Edit</Button>
+        </Link>
+        <Button variant="danger" onClick={deleteThisItem} className="m-2">
+          DELETE
+        </Button>
 
-        
+
       </div>
     </div>
   );

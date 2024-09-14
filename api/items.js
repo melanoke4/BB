@@ -30,9 +30,10 @@ export const updateItem = async (itemId, itemData) => {
   }
 };
 
-export const deleteItem = async (itemId) => {
+
+export const deleteItem = async (itemId, userId) => {
   try {
-    await api.delete(`/items/${itemId}`);
+    await api.delete(`/items/${itemId}?user_id=${userId}`);
   } catch (error) {
     console.error('Error deleting item:', error);
     throw error;

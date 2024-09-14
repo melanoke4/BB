@@ -79,6 +79,7 @@ return (
         onEdit={handleEdit} 
         onDelete={handleDelete}
         onUpdate={fetchItem}
+
       />
     </div>
   </div>

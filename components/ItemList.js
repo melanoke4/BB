@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import ItemCard from './ItemCard';
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, setItems }) => {
   const router = useRouter();
 
   const handleEdit = (itemId) => {
@@ -13,7 +13,9 @@ const ItemList = ({ items }) => {
     <div className="row">
       {items.map((item) => (
         <div key={item.id} className="col-md-4 mb-4">
-          <ItemCard item={item} onEdit={handleEdit} />
+          <ItemCard item={item} items={items} setItems={setItems} onEdit={handleEdit} />
+
+
         </div>
       ))}
     </div>
