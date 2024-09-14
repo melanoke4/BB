@@ -57,7 +57,7 @@ const ItemForm = ({ itemId, userId }) => {
     if (itemId) {
       const fetchItem = async () => {
         try {
-          const response = await api.get(`/items/${itemId}?user_id=${user.id}`);
+          const response = await api.get(`/items/${itemId}?user_id=${userId}`);
           setFormData(response.data);
         } catch (error) {
           console.error('Error fetching item:', error);
