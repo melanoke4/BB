@@ -114,7 +114,7 @@ const ItemForm = ({ itemId, userId }) => {
 
   return (
     <div className={styles.formContainer}>
-    <h2 className={styles.formTitle}>Add A New Item</h2>
+    <h2 className={styles.formTitle}>{itemId? 'Edit' : 'Add A New'} Item</h2>
     <form onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
       <label className={styles.label} htmlFor="name">Name:</label>

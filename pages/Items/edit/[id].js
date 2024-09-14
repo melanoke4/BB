@@ -25,7 +25,7 @@ const EditItemPage = () => {
 
   return (
     <div>
-      <h1>Edit Item</h1>
+      {/* <h1>Edit Item</h1> */}
       <ItemForm itemId={id} obj={editItem} userId={user.id} />
     </div>
   );
