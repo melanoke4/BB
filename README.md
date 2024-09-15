@@ -19,11 +19,11 @@ Bottomless Box provides a digital solution for inventory management, allowing us
 - React.js | Next.js | JavaScript | HTML5 | CSS3 | CSS Modules | Axios | React Router | ESLint | Prettier | npm | Git | GitHub | Context API
 
 ## Links and Resources
-- [Deployed-Postman-Documentation] (https://documenter.getpostman.com/view/30131188/2sAXjNYBVC)
-- [Deployed-Project] (https://main--bottomless-box.netlify.app/)
-- [Project-Board] (https://github.com/users/melanoke4/projects/10)
-- [Wireframe] (https://www.figma.com/design/Kou2pOP08w1ZWmX7yNJdAw/figma-test?node-id=0-1&t=O2CkDW5O6wk724LD-1)
-- [ERD] (https://dbdiagram.io/d/BB-654944b57d8bbd64659b9096)
+- [Deployed Postman Documentation](https://documenter.getpostman.com/view/30131188/2sAXjNYBVC)
+- [Deployed Project](https://main--bottomless-box.netlify.app/)
+- [Project Board](https://github.com/users/melanoke4/projects/10)
+- [Wireframe](https://www.figma.com/design/Kou2pOP08w1ZWmX7yNJdAw/figma-test?node-id=0-1&t=O2CkDW5O6wk724LD-1)
+- [ERD](https://dbdiagram.io/d/BB-654944b57d8bbd64659b9096)
 
 ## Walkthrough Videos
 
