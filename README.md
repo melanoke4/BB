@@ -20,6 +20,7 @@ Bottomless Box provides a digital solution for inventory management, allowing us
 
 ## Links and Resources
 - [Deployed Postman Documentation](https://documenter.getpostman.com/view/30131188/2sAXjNYBVC)
+- [Server-Side Repository](https://github.com/melanoke4/BB-server)
 - [Deployed Project](https://main--bottomless-box.netlify.app/)
 - [Project Board](https://github.com/users/melanoke4/projects/10)
 - [Wireframe](https://www.figma.com/design/Kou2pOP08w1ZWmX7yNJdAw/figma-test?node-id=0-1&t=O2CkDW5O6wk724LD-1)
