@@ -31,7 +31,21 @@ export default function ViewItem() {
   };
 
   useEffect(() => {
-    fetchItem();
+    if (id) {
+      console.log('Fetching item with ID:', id);
+      setLoading(true);
+      getSingleItem(id, user.id)
+        .then((data) => {
+          console.log('Item data received:', data);
+          setItemDetails(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching item:', error);
+          setError('Failed to load item details');
+          setLoading(false);
+        });
+    }
   }, [id, user.id]);
 
   const handleEdit = (itemId) => {
