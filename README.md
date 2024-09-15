@@ -27,7 +27,8 @@ Bottomless Box provides a digital solution for inventory management, allowing us
 - [ERD](https://dbdiagram.io/d/BB-654944b57d8bbd64659b9096)
 
 ## Walkthrough Videos
-
+- [Site Walkthrough](https://www.loom.com/share/cef17f34bea242e38a56a6fda5be6c9c?sid=f702e54e-12b3-4c42-a635-f409f3e87fb2)
+- [Postman Walktrough](https://www.loom.com/share/d6a0e64c9be443f687eeed9329a41ebc?sid=37e712a5-a6a9-478c-9b2d-a46bc80accfc)
 
 ## Getting Started
 1. Clone this repository to your local machine.
